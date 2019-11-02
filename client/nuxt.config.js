@@ -53,7 +53,7 @@ export default {
   auth: {
     redirect: {
       login: '/login',
-      home: '/',
+      home: '/dashboard',
       logout: false
     },
 
