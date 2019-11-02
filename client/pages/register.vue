@@ -2,7 +2,11 @@
   <div class="container mx-auto">
     <div class="mt-12 flex justify-center">
       <div class="w-1/3">
-        <form class="bg-white rounded-lg shadow-lg p-4" @input="form.errors.clear($event.target.id)" @submit.prevent="submit">
+        <form
+          class="bg-white rounded-lg shadow-lg p-4"
+          @input="form.errors.clear($event.target.id)"
+          @submit.prevent="submit"
+        >
           <h1 class="font-bold text-gray-800">
             Register
           </h1>
