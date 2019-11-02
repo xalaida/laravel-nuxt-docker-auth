@@ -1,3 +1,4 @@
+require('dotenv').config()
 
 export default {
   mode: 'universal',
@@ -23,34 +24,58 @@ export default {
   ** Global CSS
   */
   css: [
+
   ],
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '~/plugins/axios'
   ],
+
   /*
   ** Nuxt.js dev-modules
   */
   buildModules: [
-    // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
-    // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
+    '@nuxtjs/dotenv'
   ],
+
   /*
   ** Nuxt.js modules
   */
   modules: [
-    // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/auth'
   ],
-  /*
-  ** Axios module configuration
-  ** See https://axios.nuxtjs.org/options
-  */
-  axios: {
+
+  auth: {
+    redirect: {
+      login: '/login',
+      home: '/',
+      logout: false
+    },
+
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: 'api/oauth/token',
+            method: 'post',
+            propertyName: 'access_token'
+          },
+          user: {
+            url: 'api/user',
+            method: 'get',
+            propertyName: false
+          },
+          logout: false
+        }
+      }
+    }
   },
+
   /*
   ** Build configuration
   */

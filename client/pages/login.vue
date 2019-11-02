@@ -64,13 +64,20 @@ export default {
   },
 
   watch: {
-    form () {
-      this.errors = []
+    form: {
+      deep: true,
+      handler () {
+        this.errors = []
+      }
     }
   },
 
   methods: {
     async submit () {
+      if (this.errors.length) {
+        return
+      }
+
       try {
         await this.$store.dispatch('auth/login', {
           username: this.form.email,
