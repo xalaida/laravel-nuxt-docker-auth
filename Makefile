@@ -156,6 +156,9 @@ env-api:
 env-client:
 	cp .env.client client/.env
 
+passport:
+	docker-compose exec php-cli php artisan passport:install
+
 # Add permissions for Laravel cache and storage folders
 permissions:
 	sudo chmod -R 777 api/bootstrap/cache
@@ -170,7 +173,7 @@ autoload:
 	docker-compose exec php-cli composer dump-autoload
 
 # Install the environment
-install: build composer-install env-api key permissions env-client rn
+install: build composer-install env-api key permissions db-migrate env-client
 
 
 #-----------------------------------------------------------
