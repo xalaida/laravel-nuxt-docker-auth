@@ -11,7 +11,7 @@
       @input="update"
     >
 
-    <span v-show="shouldShowErrors" class="text-red-600 text-sm">{{ errors[0] }}</span>
+    <span v-show="hasError" class="text-red-600 text-sm">{{ errors[0] }}</span>
   </div>
 </template>
 
@@ -41,46 +41,19 @@ export default {
     }
   },
 
-  data () {
-    return {
-      isErrorsHidden: false
-    }
-  },
-
   computed: {
-    shouldShowErrors () {
-      return !this.isErrorsHidden && this.hasErrors
-    },
-
-    hasErrors () {
+    hasError () {
       return this.errors.length
     },
 
     inputClasses () {
-      return {
-        'border-gray-400': !this.shouldShowErrors,
-        'border-red-600': this.shouldShowErrors
-      }
-    }
-  },
-  watch: {
-    errors () {
-      this.showErrors()
+      return this.hasError ? 'border-red-600' : 'border-gray-400'
     }
   },
 
   methods: {
     update (event) {
-      this.hideErrors()
       this.$emit('input', event.target.value)
-    },
-
-    hideErrors () {
-      this.isErrorsHidden = true
-    },
-
-    showErrors () {
-      this.isErrorsHidden = false
     }
   }
 }
