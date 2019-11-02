@@ -16,12 +16,12 @@ cd app
 make install
 ```
 
-**3. Create Laravel passport clients**
+**3. Create Laravel Passport clients and copy Client secret and Client ID of Password grant client (typically it has the ID 2)**
 ```
 docker-compose exec php-cli php artisan passport:install
 ```
 
-**4. Copy Client secret and Client ID of Password grant client (typically it has the ID 2) and paste them to client/.env file**
+**4. Paste Client ID and Client secret into client/.env file**
 ```
 # client/.env
 API_URL=http://nginx:80
