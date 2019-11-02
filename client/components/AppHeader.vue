@@ -10,7 +10,7 @@
         </nuxt-link>
 
         <nuxt-link
-          v-if="$auth.loggedIn"
+          v-if="auth"
           :to="{ name: 'dashboard' }"
           class="ml-12 font-bold text-gray-100"
         >
@@ -19,7 +19,7 @@
 
         <div class="ml-auto">
           <nuxt-link
-            v-if="!$auth.loggedIn"
+            v-if="guest"
             :to="{ name: 'login' }"
             class="font-bold text-gray-100"
           >
@@ -27,7 +27,7 @@
           </nuxt-link>
 
           <nuxt-link
-            v-if="!$auth.loggedIn"
+            v-if="guest"
             :to="{ name: 'register' }"
             class="ml-12 font-bold text-gray-100"
           >
@@ -35,7 +35,7 @@
           </nuxt-link>
 
           <button
-            v-if="$auth.loggedIn"
+            v-if="auth"
             class="ml-12 font-bold text-gray-100"
             @click.prevent="logout"
           >
@@ -49,6 +49,16 @@
 
 <script>
 export default {
+  computed: {
+    guest () {
+      return !this.$auth.loggedIn
+    },
+
+    auth () {
+      return this.$auth.loggedIn
+    }
+  },
+
   methods: {
     async logout () {
       try {
