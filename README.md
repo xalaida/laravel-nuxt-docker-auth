@@ -7,8 +7,8 @@ Built with my laravel-nuxt-docker starter template [https://github.com/nevadskiy
 
 **1. Clone or download the repository and enter its folder**
 ```
-git clone https://github.com/nevadskiy/laravel-nuxt-docker.git app
-cd app
+git clone https://github.com/nevadskiy/laravel-nuxt-docker-auth.git
+cd laravel-nuxt-docker-auth
 ```
 
 **2. Run the installation script (it may take up to 10 minutes)**
