@@ -48,13 +48,14 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-
 export default {
   methods: {
-    ...mapActions({
-      logout: 'auth/logout'
-    })
+    async logout () {
+      try {
+        await this.$store.dispatch('auth/logout')
+      } catch (e) {
+      }
+    }
   }
 }
 </script>
