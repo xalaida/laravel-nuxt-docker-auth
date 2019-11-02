@@ -2,7 +2,11 @@
   <div class="container mx-auto">
     <div class="mt-12 flex justify-center">
       <div class="w-1/3">
-        <form class="bg-white rounded-lg shadow-lg p-4" @submit.prevent="submit">
+        <form
+          class="bg-white rounded-lg shadow-lg p-4"
+          @input="errors.clear($event.target.id)"
+          @submit.prevent="submit"
+        >
           <h1 class="font-bold text-gray-800">
             Sign in to your app
           </h1>
@@ -14,7 +18,7 @@
             label="Email"
             class="mt-6"
             placeholder="Enter your email..."
-            :errors="errors"
+            :errors="errors.get('email')"
           />
 
           <AppInput
@@ -41,6 +45,7 @@
 <script>
 import AppInput from '~/components/AppInput.vue'
 import AppButton from '~/components/AppButton.vue'
+import Errors from '~/support/form/Errors'
 
 export default {
   middleware: ['auth'],
@@ -59,32 +64,22 @@ export default {
         password: ''
       },
 
-      errors: []
-    }
-  },
-
-  watch: {
-    form: {
-      deep: true,
-      handler () {
-        this.errors = []
-      }
+      errors: new Errors(['email'])
     }
   },
 
   methods: {
     async submit () {
-      if (this.errors.length) {
+      if (this.errors.any()) {
         return
       }
 
       try {
-        await this.$store.dispatch('auth/login', {
-          username: this.form.email,
-          password: this.form.password
-        })
+        await this.$store.dispatch('auth/login', this.form)
       } catch (e) {
-        this.errors.push('The given credentials are invalid.')
+        this.errors.assign({
+          email: ['The given credentials are invalid.']
+        })
       }
     }
   }
