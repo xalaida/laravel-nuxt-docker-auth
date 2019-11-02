@@ -18,6 +18,10 @@ make install
 
 **3. Create Laravel Passport clients and copy Client secret and Client ID of Password grant client (typically it has the ID 2)**
 ```
+# Make command
+make passport
+
+# Full command
 docker-compose exec php-cli php artisan passport:install
 ```
 
