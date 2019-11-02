@@ -11,8 +11,11 @@ down:
 	docker-compose down
 
 # Show status of each container
-s:
+status:
 	docker-compose ps
+
+# Status alias
+s: status
 
 # Show logs of each container
 logs:
@@ -24,6 +27,9 @@ restart: down up
 # Restart node container
 restart-node:
 	docker-compose restart node
+
+# Restart node alias
+rn: restart-node
 
 # Build and up docker containers
 build:
@@ -161,3 +167,15 @@ autoload:
 
 # Install the environment
 install: build composer-install env key permissions
+
+
+#-----------------------------------------------------------
+# Git commands
+#-----------------------------------------------------------
+
+git-undo:
+	git reset --soft HEAD~1
+
+git-wip:
+	git add .
+	git commit -m "WIP"
