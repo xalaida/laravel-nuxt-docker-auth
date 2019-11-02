@@ -1,12 +1,20 @@
 <template>
-  <div class="container mx-auto">
-    <h1>Secret dashboard for only authenticated users</h1>
+  <div class="flex justify-center items-center">
+    <h1>{{ message }}</h1>
   </div>
 </template>
 
 <script>
 export default {
-  components: {
+  middleware: ['auth'],
+
+  async asyncData ({ $axios }) {
+    try {
+      const { data } = await $axios.get('/api/dashboard')
+
+      return { message: data }
+    } catch (e) {
+    }
   }
 }
 </script>

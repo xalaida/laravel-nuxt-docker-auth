@@ -13,6 +13,6 @@ Route::group([
     'middleware' => 'auth',
 ], function () {
     Route::get('dashboard', function () {
-        return ['status' => 'success'];
+        return 'Secret dashboard for only authenticated users';
     });
 });
