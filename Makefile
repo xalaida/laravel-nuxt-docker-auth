@@ -149,8 +149,12 @@ tinker:
 #-----------------------------------------------------------
 
 # Copy the environment file
-env:
-	cp .env app/.env
+env-api:
+	cp .env.api api/.env
+
+# Copy the environment file
+env-client:
+	cp .env.client client/.env
 
 # Add permissions for Laravel cache and storage folders
 permissions:
@@ -166,7 +170,7 @@ autoload:
 	docker-compose exec php-cli composer dump-autoload
 
 # Install the environment
-install: build composer-install env key permissions
+install: build composer-install env-api key permissions env-client rn
 
 
 #-----------------------------------------------------------
