@@ -72,6 +72,8 @@ export default {
         await this.form.submitUsing((data) => {
           return this.$store.dispatch('auth/register', data)
         })
+
+        await this.$store.dispatch('auth/login', this.form)
       } catch (e) {
       }
     }
